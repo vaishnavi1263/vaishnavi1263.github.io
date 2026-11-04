@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ezPayPlus Display Terminal · Shree Vaishnavi M G</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="../index.html">Shree Vaishnavi M G</a>
+  <div class="links"><a href="../index.html#projects">Projects</a><a href="../docs/ShreeVaishnavi_Resume.pdf">Resume</a><a href="../index.html#contact">Contact</a></div>
+</div></nav>
+
+<main class="wrap">
+<header class="hero" style="padding-bottom:10px">
+  <div class="kicker">Embedded Firmware · Professional project · Sole firmware engineer</div>
+  <h1>ezPayPlus Display Terminal</h1>
+  <p class="lede">Firmware for a countertop UPI payment terminal that doubles as a digital ad display. It runs on a single ESP32-S3: between payments it plays video ads; when a payment comes in it switches the same screen to a QR code, confirms the payment on screen and with a spoken announcement, then returns to the ads.</p>
+  <ul class="chips"><li>ESP32-S3</li><li>ESP-IDF v6</li><li>FreeRTOS</li><li>LVGL</li><li>ESP GMF</li><li>TinyUSB</li><li>NimBLE</li><li>MQTT/TLS over 4G</li><li>I²S</li></ul>
+</header>
+
+<div class="stats">
+  <div class="stat"><b>~20,800</b><span>lines of C</span></div>
+  <div class="stat"><b>30</b><span>protocol commands</span></div>
+  <div class="stat"><b>13</b><span>FreeRTOS tasks</span></div>
+  <div class="stat"><b>4</b><span>links: USB · BLE · 4G · SD</span></div>
+</div>
+
+<figure><img src="../img/ez_cycle.png" alt="Display cycle: idle ads, payment QR, result, back to ads"><figcaption>The display cycle the firmware runs. A static printed QR beside the screen always works, even if the display or network is down.</figcaption></figure>
+
+<h2>What I built</h2>
+<div class="two">
+  <div class="panel"><ul>
+    <li><b>Video pipeline:</b> MJPEG and JPEG playback from SD card through a GMF pipeline, with two custom elements I wrote and double-buffered DMA output to a 320×480 SPI LCD.</li>
+    <li><b>Sharing one screen:</b> LVGL payment screens take the same panel over from the video pipeline and hand it back without glitches.</li>
+    <li><b>Payment state machine:</b> table-driven, covering QR, result, timeout, cancel and text messages.</li>
+    <li><b>Binary USB protocol:</b> CRC32-checked packets with ACK/NACK to an Android host. The same commands work over BLE.</li>
+  </ul></div>
+  <div class="panel"><ul>
+    <li><b>Ad campaigns:</b> uploads that survive power loss, schedules by date and time of day, and an audience-attention metric.</li>
+    <li><b>4G connectivity:</b> an AT-command engine for the SIMCom A7670C with modem-reboot detection, and MQTT over TLS with request and transaction IDs matched.</li>
+    <li><b>Spoken confirmation:</b> "Rupees … received" built from recorded word clips, played over I²S.</li>
+    <li><b>Firmware updates:</b> two-slot (A/B) update over BLE, plus host-set time, log capture and memory diagnostics.</li>
+  </ul></div>
+</div>
+
+<figure><img src="../img/ez_layers.png" alt="Firmware layer architecture"><figcaption>Firmware layers: every command, from any link, goes through one control task. Lower-level components reach the application only through registered function-pointer tables, so there are no circular dependencies.</figcaption></figure>
+
+<h2>Hardware problems I diagnosed and fixed</h2>
+<div class="two">
+  <div class="panel"><ul>
+    <li><b>LVGL watchdog hang</b> on the result screen: an off-screen animation layer needed more memory than LVGL's pool had. Fixed with a 128 KB PSRAM pool.</li>
+    <li><b>Video froze after the first payment:</b> LVGL overwrote the panel's DMA-done callback. Fixed by re-registering it on every resume.</li>
+    <li><b>Crash when closing a screen:</b> LVGL's refresh ran between delete and detach. Fixed by reversing the order.</li>
+    <li><b>Stack overflows</b> in the LVGL and keypad tasks: each resized from the overflow seen on hardware.</li>
+  </ul></div>
+  <div class="panel"><ul>
+    <li><b>SD card out of DMA memory</b> during audio: BLE plus Wi-Fi used up internal RAM. Moved NimBLE to PSRAM and made Wi-Fi optional.</li>
+    <li><b>4G modem reboot loop:</b> supply voltage dropped during transmit bursts. Fixed on the board, plus automatic recovery in firmware.</li>
+    <li><b>Wrong colours from the decoder:</b> a GMF element copy lost a setting that lives in internal state. Set it on the pipeline's own copy.</li>
+    <li><b>Two payment commands slipping through:</b> closed by setting the state before queuing the event.</li>
+  </ul></div>
+</div>
+
+<div class="callout">This is commercial work, so this page leaves out internal details. The full technical write-up (architecture, protocol, the state machine, the testing approach and the status of every feature) is available on request.</div>
+
+<a class="back" href="../index.html#projects">← All projects</a>
+</main>
+<footer><div class="wrap">© 2026 Shree Vaishnavi M G</div></footer>
+</body>
+</html>

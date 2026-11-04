@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>USB-C ESP32-S3 Development Board · Shree Vaishnavi M G</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="../index.html">Shree Vaishnavi M G</a>
+  <div class="links"><a href="../index.html#projects">Projects</a><a href="../docs/ShreeVaishnavi_Resume.pdf">Resume</a><a href="../index.html#contact">Contact</a></div>
+</div></nav>
+
+<main class="wrap">
+<header class="hero" style="padding-bottom:10px">
+  <div class="kicker">Hardware design · Personal project · <span class="tag p">Design stage</span></div>
+  <h1>USB-C ESP32-S3 Development Board</h1>
+  <p class="lede">A battery-capable ESP32-S3 board, powered and programmed over a single USB-C cable. The design is complete on paper: requirements, component choices, power budget, pin plan, PCB rules and bring-up plan. Schematic capture in KiCad is next; the board has not been made yet.</p>
+  <ul class="chips"><li>ESP32-S3</li><li>USB-C</li><li>Li-ion charging</li><li>Buck regulator</li><li>ESD protection</li><li>KiCad</li></ul>
+</header>
+
+<figure><img src="../img/usbc_block.png" alt="Board block diagram"><figcaption>Block diagram. Power is shown in amber, data in blue. VBUS powers the board and charges the cell; when USB is unplugged, a P-MOSFET switches the battery onto the supply.</figcaption></figure>
+
+<h2>Key design decisions</h2>
+<div class="two">
+  <div class="panel"><ul>
+    <li><b>5.1 kΩ CC resistors:</b> without them, a USB-C charger supplies 0 V. This is the most common USB-C board mistake.</li>
+    <li><b>Native USB-Serial/JTAG:</b> no USB-to-serial chip; flashing, the serial console and debugging all go over one cable.</li>
+    <li><b>Buck regulator instead of an LDO:</b> an LDO from 5 V would dissipate about 0.5 W at Wi-Fi load and heat up by more than 100 °C.</li>
+  </ul></div>
+  <div class="panel"><ul>
+    <li><b>250 mA charge current:</b> keeps the typical draw within the 500 mA a laptop USB port guarantees.</li>
+    <li><b>Pin plan:</b> SPI on the direct-routed pins, battery sensing on ADC1 because ADC2 doesn't work during Wi-Fi, and strapping pins kept off the headers.</li>
+    <li><b>Bring-up plan:</b> 8 steps, each with a pass criterion, with the bench supply current-limited throughout.</li>
+  </ul></div>
+</div>
+
+<p><a class="btn primary" href="../docs/USB-C_Dev_Board_Design_Specification.pdf">Read the design specification (PDF)</a></p>
+<a class="back" href="../index.html#projects">← All projects</a>
+</main>
+<footer><div class="wrap">© 2026 Shree Vaishnavi M G</div></footer>
+</body>
+</html>

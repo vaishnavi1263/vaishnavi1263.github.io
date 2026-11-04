@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shree Vaishnavi M G · Firmware Engineer</title>
+<meta name="description" content="Portfolio of Shree Vaishnavi M G, embedded firmware engineer: ESP32-S3, ESP-IDF, FreeRTOS, LVGL, BLE, analog VLSI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="index.html">Shree Vaishnavi M G</a>
+  <div class="links"><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="docs/ShreeVaishnavi_Resume.pdf">Resume</a><a href="#contact">Contact</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="kicker">Embedded Firmware Engineer · Bengaluru</div>
+  <h1>I build firmware for real devices: displays, payments, wireless and power.</h1>
+  <p class="lede">I write production firmware in Embedded C on the ESP32-S3 with ESP-IDF and FreeRTOS: video playback and LVGL interfaces, USB and BLE protocols, 4G connectivity, audio and over-the-air updates. I also bring up and debug the hardware they run on, and design analog and mixed-signal circuits.</p>
+  <div class="btns">
+    <a class="btn primary" href="#projects">See projects</a>
+    <a class="btn" href="docs/ShreeVaishnavi_Resume.pdf">Download resume</a>
+    <a class="btn" href="mailto:vaishnavimudligiri@gmail.com">Email me</a>
+  </div>
+</div></header>
+
+<main class="wrap">
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="grid">
+
+    <a class="card" href="projects/ezpayplus.html" style="color:inherit; text-decoration:none">
+      <div class="thumb"><img class="contain" src="img/ez_layers.png" alt="Firmware layer diagram of the ezPayPlus display terminal"></div>
+      <div class="body">
+        <h3>ezPayPlus Display Terminal</h3>
+        <div class="result">~20,800 lines of C · 13 FreeRTOS tasks · 4 transports</div>
+        <p>Firmware for a UPI payment terminal with digital signage: MJPEG video, a QR code on the same LCD, spoken payment confirmation, USB/BLE/4G, BLE OTA.</p>
+        <ul class="chips"><li>ESP32-S3</li><li>ESP-IDF</li><li>FreeRTOS</li><li>LVGL</li><li>GMF</li><li>BLE</li><li>MQTT</li></ul>
+        <span class="more">Read more →</span>
+      </div>
+    </a>
+
+    <a class="card" href="projects/sar-adc.html" style="color:inherit; text-decoration:none">
+      <div class="thumb"><img class="contain" src="img/adc_block.jpg" alt="SAR ADC block diagram"></div>
+      <div class="body">
+        <h3>10-bit SAR ADC in 90 nm CMOS</h3>
+        <div class="result">900 kS/s · 31.18 µW · 1.5 V</div>
+        <p>A successive-approximation ADC designed transistor by transistor in Cadence Virtuoso. I built the SAR control logic and integrated and verified the full converter.</p>
+        <ul class="chips"><li>Analog VLSI</li><li>Cadence Virtuoso</li><li>Spectre</li><li>90 nm</li></ul>
+        <span class="more">Read more →</span>
+      </div>
+    </a>
+
+    <a class="card" href="projects/robotic-arm.html" style="color:inherit; text-decoration:none">
+      <div class="thumb"><img src="img/arm_result.jpg" alt="Electromagnetic robotic arm"></div>
+      <div class="body">
+        <h3>Electromagnetic Robotic Arm</h3>
+        <div class="result">3 DOF · electromagnet end effector · ~14 s cycle</div>
+        <p>An Arduino-controlled pick-and-place arm that separates iron parts from a mixture. I did the electronics, wiring and firmware, plus a 2026 review and redesign.</p>
+        <ul class="chips"><li>Arduino</li><li>PWM servos</li><li>Relay</li><li>Electromagnet</li></ul>
+        <span class="more">Read more →</span>
+      </div>
+    </a>
+
+    <a class="card" href="projects/usbc-board.html" style="color:inherit; text-decoration:none">
+      <div class="thumb"><img class="contain" src="img/usbc_block.png" alt="USB-C development board block diagram"></div>
+      <div class="body">
+        <h3>USB-C ESP32-S3 Dev Board <span class="tag p">Design stage</span></h3>
+        <div class="result">USB-C · Li-ion charging · 2 A buck · ESD protection</div>
+        <p>Design specification for a battery-capable ESP32-S3 board: component choices, power budget, pin plan, PCB rules and bring-up plan.</p>
+        <ul class="chips"><li>Hardware design</li><li>Power</li><li>USB-C</li><li>KiCad</li></ul>
+        <span class="more">Read more →</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills">
+    <div><h4>Embedded firmware</h4><p>Embedded C, C++, ESP-IDF, FreeRTOS, LVGL, ESP GMF, state machines, debugging</p></div>
+    <div><h4>Interfaces</h4><p>SPI, I²C, UART, USB (CDC, host), BLE GATT, Wi-Fi, I²S, SDMMC, GPIO, PWM, DMA</p></div>
+    <div><h4>Display and media</h4><p>TFT LCD, JPEG/MJPEG decoding, RGB565, video and image playback, audio playback</p></div>
+    <div><h4>Connectivity</h4><p>4G LTE (AT commands), MQTT over TLS, BLE OTA, binary protocols with CRC framing</p></div>
+    <div><h4>Hardware</h4><p>Schematic and PCB design, component selection, power regulation, board bring-up, datasheet analysis</p></div>
+    <div><h4>VLSI and tools</h4><p>Cadence Virtuoso, Spectre, Quartus Prime, ModelSim, Multisim, Git, Python, VS Code</p></div>
+  </div>
+</section>
+
+<section id="experience">
+  <h2>Experience</h2>
+  <ul class="timeline">
+    <li><strong>IoT Full Stack Junior Consultant</strong>, Vittam Solutions Pvt. Ltd., Bengaluru <span class="when">· 2025 – present</span><br>
+      <span style="color:var(--ink2)">Firmware and hardware development for an ESP32-S3 smart payment terminal.</span></li>
+    <li><strong>Engineering Intern</strong>, Bharat Heavy Electricals Limited (BHEL) <span class="when">· 6 weeks</span><br>
+      <span style="color:var(--ink2)">Industrial exposure to electronics, electrical systems, instrumentation and control.</span></li>
+    <li><strong>B.E., Electronics and Communication Engineering</strong>, Dayananda Sagar College of Engineering (VTU) <span class="when">· 2026 · CGPA 7.8/10</span></li>
+  </ul>
+  <h3>Certifications and awards</h3>
+  <ul>
+    <li>1st Place, Electromania 2024: RTL design and problem solving using ModelSim</li>
+    <li>NPTEL: System Design Through Verilog, IIT Guwahati</li>
+    <li>MATLAB Onramp, MathWorks</li>
+  </ul>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>I'm open to embedded firmware and hardware roles.</p>
+  <div class="btns" style="margin-top:0">
+    <a class="btn primary" href="mailto:vaishnavimudligiri@gmail.com">vaishnavimudligiri@gmail.com</a>
+    <a class="btn" href="https://www.linkedin.com/in/shree-vaishnavi-m-g">LinkedIn</a>
+    <a class="btn" href="https://github.com/vaishnavi1263">GitHub</a>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">© 2026 Shree Vaishnavi M G</div></footer>
+</body>
+</html>

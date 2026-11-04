@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electromagnetic Robotic Arm · Shree Vaishnavi M G</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="../index.html">Shree Vaishnavi M G</a>
+  <div class="links"><a href="../index.html#projects">Projects</a><a href="../docs/ShreeVaishnavi_Resume.pdf">Resume</a><a href="../index.html#contact">Contact</a></div>
+</div></nav>
+
+<main class="wrap">
+<header class="hero" style="padding-bottom:10px">
+  <div class="kicker">Robotics · Embedded · Academic project · 2023</div>
+  <h1>Electromagnetic Robotic Arm</h1>
+  <p class="lede">A 3-degree-of-freedom arm that picks up iron and steel parts with an electromagnet instead of a mechanical gripper, for example pulling iron filings out of sand. It runs on an Arduino Uno with three MG996R servos and a relay-switched electromagnet.</p>
+  <ul class="chips"><li>Arduino</li><li>PWM servos</li><li>Relay</li><li>Electromagnet</li><li>3D printing</li></ul>
+</header>
+
+<div class="stats">
+  <div class="stat"><b>3 DOF</b><span>base · elbow · wrist</span></div>
+  <div class="stat"><b>3 × MG996R</b><span>11 kg·cm servos</span></div>
+  <div class="stat"><b>~14 s</b><span>per pick-and-place cycle</span></div>
+  <div class="stat"><b>50 °/s</b><span>speed limit in software</span></div>
+</div>
+
+<div class="two">
+  <figure style="margin-top:0"><img src="../img/arm_result.jpg" alt="Robotic arm with electromagnet end effector"><figcaption>The finished arm with the electromagnet on the end.</figcaption></figure>
+  <div>
+    <h3 style="margin-top:0">My part: electronics, wiring and firmware</h3>
+    <ul>
+      <li><b>Servo wiring and power:</b> servo signals on PWM pins D3/D5/D6, with soldered wiring that holds up while the arm moves.</li>
+      <li><b>Electromagnet circuit:</b> powered from a Li-ion pack with a battery management system and switched through a relay, kept separate from the Arduino's 5 V logic.</li>
+      <li><b>Motion firmware:</b> each joint moves one degree every 20 ms, for smooth movement with less current draw.</li>
+      <li><b>Testing:</b> iron filings separated from a mixture, and a nail picked up and dropped at a set spot.</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Looking back: 2026 review and v2 design</h2>
+<p>I reviewed the 2023 build three years later and found eight issues, including:</p>
+<ul>
+  <li>a <code>for</code> loop that never runs;</li>
+  <li>joints jumping back to home at the start of each cycle;</li>
+  <li>manual magnet switching;</li>
+  <li>no flyback diode across the electromagnet coil;</li>
+  <li>servo power taken from the wrong supply.</li>
+</ul>
+<p>The v2 design fixes all of them:</p>
+<ul>
+  <li>a relay controlled by the Arduino;</li>
+  <li>all joints moving together so they arrive at the same time;</li>
+  <li>a pose table worked out from the arm's kinematics;</li>
+  <li>a dedicated 6 V supply for the servos;</li>
+  <li>a test plan with measurements.</li>
+</ul>
+<p>The full Arduino code is in the documentation.</p>
+
+<p><a class="btn primary" href="../docs/Electromagnetic_Robotic_Arm_Documentation.pdf">Read the full documentation (PDF)</a></p>
+<a class="back" href="../index.html#projects">← All projects</a>
+</main>
+<footer><div class="wrap">© 2026 Shree Vaishnavi M G</div></footer>
+</body>
+</html>
